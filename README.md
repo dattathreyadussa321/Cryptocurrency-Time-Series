@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ![header](https://i.ibb.co/kHXgpXS/Bitcoin-Banner-1900-x-500.jpg)
 
 # Cryptocurrency Time Series
@@ -67,3 +68,6 @@ For additional questions, please contact [TJ](https://www.linkedin.com/in/thomas
 ├── Final_Main_Notebook.ipynb           <- Technical and narrative documentation in Jupyter Notebook
 └── Project_Presentation.pdf            <- PDF version of project presentation
 ```
+=======
+# Cryptocurrency-Time-Series
+>>>>>>> c0472cfadecb3c5147146494357097309b16dc26

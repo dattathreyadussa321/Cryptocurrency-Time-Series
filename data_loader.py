@@ -1,28 +1,9 @@
-"""
-Data loading module for cryptocurrency time series data.
-"""
-
 import pandas as pd
 import os
 from config import DATA_DIR, DATA_COLUMNS
 
 
 def get_data(coin='bitcoin', year=2017):
-    """
-    Load cryptocurrency data for a specific coin and year.
-    
-    Parameters:
-    -----------
-    coin : str
-        Cryptocurrency name (default: 'bitcoin')
-    year : int
-        Year of data to load (default: 2017)
-    
-    Returns:
-    --------
-    pd.DataFrame
-        DataFrame with timestamp index and cryptocurrency data
-    """
     filepath = os.path.join(DATA_DIR, f'{coin}_{year}.csv')
     
     if not os.path.exists(filepath):
@@ -38,21 +19,6 @@ def get_data(coin='bitcoin', year=2017):
 
 
 def load_all_years(coin='bitcoin', years=None):
-    """
-    Load and concatenate cryptocurrency data for multiple years.
-    
-    Parameters:
-    -----------
-    coin : str
-        Cryptocurrency name (default: 'bitcoin')
-    years : list
-        List of years to load (default: [2017, 2018, 2019, 2020, 2021])
-    
-    Returns:
-    --------
-    pd.DataFrame
-        Concatenated DataFrame with all years of data
-    """
     if years is None:
         years = [2017, 2018, 2019, 2020, 2021]
     
@@ -76,14 +42,6 @@ def load_all_years(coin='bitcoin', years=None):
 
 
 def get_available_data():
-    """
-    Get a list of available cryptocurrency data files.
-    
-    Returns:
-    --------
-    dict
-        Dictionary with coin names as keys and lists of available years as values
-    """
     available_data = {}
     
     if not os.path.exists(DATA_DIR):
@@ -91,7 +49,6 @@ def get_available_data():
     
     for filename in os.listdir(DATA_DIR):
         if filename.endswith('.csv'):
-            # Parse filename: coin_year.csv
             parts = filename.replace('.csv', '').split('_')
             if len(parts) == 2:
                 coin, year = parts
@@ -103,7 +60,6 @@ def get_available_data():
                 except ValueError:
                     continue
     
-    # Sort years for each coin
     for coin in available_data:
         available_data[coin].sort()
     
@@ -111,7 +67,6 @@ def get_available_data():
 
 
 if __name__ == "__main__":
-    # Test the module
     print("Testing data_loader module...")
     print("\nAvailable data:")
     print(get_available_data())
