@@ -64,6 +64,3 @@ For additional questions, please contact at  dattathreyadussa08@gmail.com
 ├── Final_Main_Notebook.ipynb           <- Technical and narrative documentation in Jupyter Notebook
 └── Project_Presentation.pdf            <- PDF version of project presentation
 ```
-=======
-# Cryptocurrency-Time-Series
->>>>>>> c0472cfadecb3c5147146494357097309b16dc26
