@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptocurrency Time Series Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">₿</div>
+                <h1>Crypto<span class="gradient-text">Forecast</span></h1>
+            </div>
+            <nav class="nav">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#models" class="nav-link">Models</a>
+                <a href="#predictions" class="nav-link">Predictions</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h2 class="hero-title">Bitcoin Time Series <span class="gradient-text">Analysis & Forecasting</span></h2>
+                <p class="hero-subtitle">Advanced ARIMA models for cryptocurrency price prediction</p>
+            </section>
+
+            <!-- Data Summary Cards -->
+            <section class="stats-grid" id="dashboard">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Records</div>
+                        <div class="stat-value" id="total-records">--</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Current Price</div>
+                        <div class="stat-value" id="current-price">$--</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Max Price</div>
+                        <div class="stat-value" id="max-price">$--</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Model RMSE</div>
+                        <div class="stat-value" id="model-rmse">--</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Historical Chart -->
+            <section class="chart-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Historical Price Chart</h3>
+                        <button class="btn btn-primary" onclick="loadHistoricalChart()">
+                            <span class="btn-icon">📈</span> Load Chart
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="historical-chart" class="chart-container">
+                            <div class="loading-state">
+                                <div class="loading-spinner"></div>
+                                <p>Click "Load Chart" to visualize historical Bitcoin prices</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Model Comparison -->
+            <section class="chart-section" id="models">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Time Series Models Comparison</h3>
+                        <button class="btn btn-secondary" onclick="runModels()">
+                            <span class="btn-icon">🔬</span> Run Models
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="models-container" class="models-container">
+                            <div class="loading-state">
+                                <div class="loading-spinner"></div>
+                                <p>Click "Run Models" to compare ARIMA, Random Walk, and other time series models</p>
+                                <p class="note">⚠️ This process may take 1-2 minutes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Predictions -->
+            <section class="chart-section" id="predictions">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Price Predictions</h3>
+                        <div class="controls">
+                            <div class="input-group">
+                                <label for="start-date">Start Date:</label>
+                                <input type="date" id="start-date" value="2021-10-01">
+                            </div>
+                            <div class="input-group">
+                                <label for="pred-days">Days:</label>
+                                <input type="number" id="pred-days" value="30" min="1" max="90">
+                            </div>
+                            <button class="btn btn-accent" onclick="generatePredictions()">
+                                <span class="btn-icon">🔮</span> Generate Predictions
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="predictions-container" class="predictions-container">
+                            <div class="loading-state">
+                                <div class="loading-spinner"></div>
+                                <p>Configure parameters and click "Generate Predictions"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prediction Metrics -->
+                <div class="card" id="metrics-card" style="display:none;">
+                    <div class="card-header">
+                        <h3 class="card-title">Prediction Accuracy</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <div class="metric-label">RMSE</div>
+                                <div class="metric-value" id="metric-rmse">$--</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-label">MAE</div>
+                                <div class="metric-value" id="metric-mae">$--</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-label">MAPE</div>
+                                <div class="metric-value" id="metric-mape">--%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Future Predictions -->
+            <section class="chart-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Future Price Forecast</h3>
+                        <div class="controls">
+                            <div class="input-group">
+                                <label for="future-days">Days Ahead:</label>
+                                <input type="number" id="future-days" value="7" min="1" max="30">
+                            </div>
+                            <button class="btn btn-accent" onclick="predictFuture()">
+                                <span class="btn-icon">🚀</span> Forecast Future
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="future-container" class="table-container">
+                            <div class="loading-state">
+                                <p>Forecast future Bitcoin prices beyond available data</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 CryptoForecast | Advanced Time Series Analysis for Bitcoin</p>
+            <p class="footer-note">Data: 2017-2021 | Models: ARIMA, Random Walk, ARIMAX</p>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display:none;">
+        <div class="loading-content">
+            <div class="loading-spinner large"></div>
+            <p id="loading-text">Processing...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
