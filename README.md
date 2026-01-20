@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-![header](https://i.ibb.co/kHXgpXS/Bitcoin-Banner-1900-x-500.jpg)
 
 # Cryptocurrency Time Series
-Authors: [TJ Bray](https://www.linkedin.com/in/thomas-tj-bray-24499354/), [Aalok Joshi](https://www.linkedin.com/in/aalokjoshi113/), [Paul Lindquist](https://www.linkedin.com/in/paul-lindquist/)
 
 ## Overview
 Time series is, quite simply, a series of data points indexed over time. Time series analysis is used to extract meaningful statistics, patterns, etc. from time series data, while time series forecasting uses a model to predict future values based on previously observed data. We encounter time series in our everyday lives in the form of outside temperatures, home values and stock prices, all over time.
@@ -58,8 +55,7 @@ After completing our project, we'd ideally expand our process. Next steps would 
 ## For More Information
 Please review our full analysis in our [Jupyter Notebook](Final_Main_Notebook.ipynb) or [presentation deck](Project_Presentation.pdf).
 
-For additional questions, please contact [TJ](https://www.linkedin.com/in/thomas-tj-bray-24499354/), [Aalok](https://www.linkedin.com/in/aalokjoshi113/), [Paul](https://www.linkedin.com/in/paul-lindquist/).
-
+For additional questions, please contact at  dattathreyadussa08@gmail.com 
 ## Respository Structure
 ```
 ├── data                                <- Source data .csv files
